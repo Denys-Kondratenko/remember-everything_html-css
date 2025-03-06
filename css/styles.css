@@ -56,6 +56,7 @@ body {
 }
 
 .section {
+  padding: 94px 0;
 }
 
 .container {
@@ -198,7 +199,6 @@ body {
 /* --------------------------Advantages------------------------ */
 
 .advantages {
-  padding: 94px 0;
 }
 
 .visually-hidden {
@@ -242,7 +242,7 @@ body {
 /* --------------------------Work------------------------ */
 
 .work {
-  padding-bottom: 94px;
+  padding: 0 0 94px 0;
 }
 
 .work-title {
@@ -270,8 +270,6 @@ body {
 /* --------------------------Team------------------------ */
 
 .team {
-  padding: 94px 0;
-
   background-color: var(--gray-background-color);
 }
 
@@ -378,7 +376,6 @@ body {
 /* --------------------------Portfolio------------------------ */
 
 .portfolio {
-  padding: 94px 0;
 }
 
 .portfolio-title {
