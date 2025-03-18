@@ -11,6 +11,10 @@
   --active-btn-background-color: #188ce8;
   --gray-background-color: #f5f4fa;
   --hero-background-color: #c4c4c4;
+  --work-overlay: rgba(47, 48, 58, 0.8);
+  --portfolio-overlay: rgba(33, 150, 243, 0.9);
+  --backdrop-background-color: rgba(0, 0, 0, 0.2);
+  --animation: 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 p,
@@ -110,20 +114,53 @@ body {
 .navigation-item {
 }
 
-.navigation-link {
+.navigation-link,
+.contacts-link {
+  position: relative;
   display: block;
   padding-top: 32px;
-  padding-bottom: 32px;
+  padding-bottom: 31px;
 
   font-weight: 500;
   font-size: 14px;
   letter-spacing: 0.02em;
 
   color: var(--secondary-color);
+
+  transition: color var(--animation);
+}
+
+.navigation-link::after,
+.contacts-link::after {
+  content: "";
+  display: block;
+  position: absolute;
+  bottom: -1px;
+  width: 100%;
+  height: 4px;
+
+  border-radius: 2px;
+  background-color: var(--accent-color);
+
+  transform: scaleX(0);
+  transition: transform var(--animation);
+}
+
+.navigation-link:hover::after,
+.navigation-link:focus::after,
+.contacts-link:hover::after,
+.contacts-link:focus::after {
+  transform: scaleX(1);
 }
 
 .navigation-link.current {
   color: var(--accent-color);
+}
+
+.navigation-link.current::after {
+  background-color: var(--accent-color);
+
+  transform: scaleX(1);
 }
 
 .contacts-list {
@@ -135,12 +172,6 @@ body {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding-top: 32px;
-  padding-bottom: 32px;
-
-  font-weight: 500;
-  font-size: 14px;
-  letter-spacing: 0.02em;
 
   color: inherit;
 }
@@ -148,12 +179,14 @@ body {
 .envelope-icon {
   width: 16px;
   height: 12px;
+
   fill: currentColor;
 }
 
 .smartphone-icon {
   width: 10px;
   height: 16px;
+
   fill: currentColor;
 }
 
@@ -214,6 +247,7 @@ body {
 
   color: var(--white-color);
   background-color: var(--accent-color);
+  transition: background-color var(--animation);
 }
 
 .hero-btn:hover,
@@ -301,10 +335,23 @@ body {
 }
 
 .work-item {
+  position: relative;
   flex-basis: calc((100% - 60px) / 3);
 }
 
 .work-image {
+}
+
+.work-text {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 27px 0;
+  font-weight: 700;
+  text-transform: uppercase;
+  text-align: center;
+  color: var(--white-color);
+  background-color: var(--work-overlay);
 }
 
 /* --------------------------Team------------------------ */
@@ -383,6 +430,7 @@ body {
 
   background-color: var(--primary-background-color);
   color: var(--primary-icon-color);
+  transition: background-color var(--animation), color var(--animation);
 }
 
 .social-icon {
@@ -433,6 +481,7 @@ body {
   border: 1px solid var(--primary-icon-color);
   border-radius: 4px;
   color: var(--primary-icon-color);
+  transition: color var(--animation), border var(--animation);
 }
 
 .clients-icon {
@@ -499,10 +548,12 @@ body {
 
 .first-address-link {
   color: var(--white-color);
+  transition: color var(--animation);
 }
 
 .secondary-address-link {
   color: var(--address-secondary-color);
+  transition: color var(--animation);
 }
 
 .first-address-link:hover,
@@ -559,6 +610,8 @@ body {
   color: var(--secondary-color);
   background-color: var(--gray-background-color);
   cursor: pointer;
+  transition: background-color var(--animation), color var(--animation),
+    box-shadow var(--animation);
 }
 
 .filter-btn:hover,
@@ -577,6 +630,7 @@ body {
 
 .portfolio-item {
   flex-basis: calc((100% - 60px) / 3);
+  transition: box-shadow var(--animation);
 }
 
 .portfolio-item:hover,
@@ -588,13 +642,42 @@ body {
 .portfolio-link {
 }
 
+.portfolio-wrap {
+  position: relative;
+  overflow: hidden;
+}
+
 .portfolio-image {
 }
+
+.portfolio-overlay {
+  position: absolute;
+  top: 0;
+  transform: translateY(100%);
+  height: 100%;
+  padding: 63px 24px;
+  font-size: 18px;
+  line-height: 1.56;
+  letter-spacing: 0.03em;
+  color: var(--white-color);
+  background-color: var(--portfolio-overlay);
+  overflow: auto;
+  opacity: 0;
+  transition: transform var(--animation), opacity var(--animation);
+}
+
+.portfolio-item:hover .portfolio-overlay,
+.portfolio-item:focus .portfolio-overlay {
+  transform: translateY(0);
+  opacity: 1;
+}
+
 .portfolio-item-wrap {
   padding: 20px 24px;
   border: 1px solid #eee;
   border-top: 0;
 }
+
 .portfolio-name {
   margin-bottom: 4px;
   font-weight: 700;
@@ -609,4 +692,68 @@ body {
   line-height: 1.875;
   letter-spacing: 0.03em;
   color: var(--primary-color);
+}
+
+/* --------------------------Modal------------------------ */
+.backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  background-color: var(--backdrop-background-color);
+
+  opacity: 1;
+  transition: opacity var(--animation), visibility var(--animation);
+}
+
+.backdrop.is-hidden {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.backdrop.is-hidden .modal {
+  transform: translate(-50%, -50%) scale(0.1);
+}
+
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+
+  border-radius: 4px;
+  min-width: 528px;
+  min-height: 581px;
+
+  box-shadow: 0 2px 1px 0 rgba(0, 0, 0, 0.2), 0 1px 1px 0 rgba(0, 0, 0, 0.14),
+    0 1px 3px 0 rgba(0, 0, 0, 0.12);
+  background-color: #fff;
+
+  transition: transform var(--animation);
+}
+
+.modal-close-btn {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  display: flex;
+  align-items: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+  transition: fill var(--animation);
+}
+
+.modal-close-btn:hover {
+  fill: var(--accent-color);
+}
+
+.modal-close-icon {
+  width: 18px;
+  height: 18px;
 }
