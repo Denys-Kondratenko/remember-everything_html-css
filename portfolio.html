@@ -39,7 +39,7 @@
             </li>
 
             <li class="navigation-item">
-              <a href="" class="navigation-link link">Контакти</a>
+              <a href="#contacts" class="navigation-link link">Контакти</a>
             </li>
           </ul>
         </nav>
@@ -356,7 +356,7 @@
           <a href="./index.html" lang="eu" class="footer-accent-logo link"
             >Web<span class="footer-logo">Studio</span></a
           >
-          <address class="address">
+          <address class="address" id="contacts">
             <ul class="address-list list">
               <li class="address-item">
                 <a
@@ -383,7 +383,7 @@
           </address>
         </div>
         <div class="join-wrap">
-          <h2 class="join-title">Приєднуйтесь</h2>
+          <h2 class="fotter-title">Приєднуйтесь</h2>
           <ul class="social-list list">
             <li class="social-item">
               <a
@@ -434,6 +434,24 @@
               </a>
             </li>
           </ul>
+        </div>
+        <div class="subscribe-wrap">
+          <h2 class="fotter-title">Підпишіться на розсилку</h2>
+          <form class="subscribe-form">
+            <input
+              class="subscribe-input"
+              type="email"
+              name="email"
+              placeholder="E-mail"
+              required
+            />
+            <button class="btn subscribe-btn" type="submit">
+              Підписатися
+              <svg class="subscribe-icon">
+                <use href="./img/icons.svg#icon-send"></use>
+              </svg>
+            </button>
+          </form>
         </div>
       </div>
     </footer>
